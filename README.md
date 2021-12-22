@@ -22,5 +22,3 @@ API
 Training
 Blog
 About
-
-
