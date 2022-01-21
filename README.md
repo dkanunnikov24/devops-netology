@@ -28,11 +28,11 @@
 <br/>dd01a35078f040ca984cdd349f18d0b67e486c35 Update CHANGELOG.md
 <br/>225466bc3e5f35baa5d07197bbc079345b77525e Cleanup after v0.12.23 release
 
-5) Найдите коммит в котором была создана функция func providerSource, ее определение в коде выглядит так func providerSource(...) (вместо троеточего перечислены аргументы).
+5)Найдите коммит в котором была создана функция func providerSource, ее определение в коде выглядит так func providerSource(...) (вместо троеточего перечислены аргументы).
 <br/><b>РЕШЕНИЕ:</b> git log -S "func providerSource" --oneline
 <br/><b>ОТВЕТ:</b> В коммите 8c928e83589d90a031f811fae52a81be7153e82f
 
-6) Найдите все коммиты в которых была изменена функция globalPluginDirs.
+6)Найдите все коммиты в которых была изменена функция globalPluginDirs.
 <br/><b>РЕШЕНИЕ:</b> git log -S "globalPluginDirs" --oneline
 <br/><b>ОТВЕТ:</b>
 <br/>ffe056b Move command/ to internal/command/
@@ -41,6 +41,6 @@
 <br/>c0b1761 prevent log output during init
 <br/>8364383 Push plugin discovery down into command package
 
-7) Кто автор функции synchronizedWriters?
+7)Кто автор функции synchronizedWriters?
 <br/><b>РЕШЕНИЕ:</b> git log -S "synchronizedWriters" --oneline
 <br/><b>ОТВЕТ:</b> Автор Martin Atkins mart@degeneration.co.uk
