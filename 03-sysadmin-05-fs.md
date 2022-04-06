@@ -36,7 +36,7 @@ sdc                    8:32   0  2.5G  0 disk
 ```
 
 #### 4. Используя `fdisk`, разбейте первый диск на 2 раздела: 2 Гб, оставшееся пространство.
-
+</br><b>РЕШЕНИЕ:</b>
 ```shell
 vagrant@vagrant:~$ sudo fdisk /dev/sdb
 
@@ -84,7 +84,7 @@ Syncing disks.
 ```
 
 #### 5. Используя `sfdisk`, перенесите данную таблицу разделов на второй диск.
-
+</br><b>РЕШЕНИЕ:</b>
 ```shell
 vagrant@vagrant:~$ sudo sfdisk -d /dev/sdb > sdb.dump
 vagrant@vagrant:~$ sudo sfdisk /dev/sdc < sdb.dump
@@ -119,7 +119,7 @@ Syncing disks.
 ```
 
 #### 6. Соберите `mdadm` RAID1 на паре разделов 2 Гб.
-
+</br><b>РЕШЕНИЕ:</b>
 ```shell
 root@vagrant:~# mdadm --create /dev/md0 --level=1 --raid-devices=2 /dev/sd[bc]1
 mdadm: Note: this array has metadata at the start and
@@ -133,7 +133,7 @@ mdadm: array /dev/md0 started.
 ```
 
 #### 7. Соберите `mdadm` RAID0 на второй паре маленьких разделов.
-
+</br><b>РЕШЕНИЕ:</b>
 ```shell
 root@vagrant:~# mdadm --create /dev/md1 --level=0 --raid-devices=2 /dev/sd[bc]2
 mdadm: Defaulting to version 1.2 metadata
@@ -141,7 +141,7 @@ mdadm: array /dev/md1 started.
 ```
 
 #### 8. Создайте 2 независимых PV на получившихся md-устройствах.
-
+</br><b>РЕШЕНИЕ:</b>
 ```shell
 root@vagrant:~# pvcreate /dev/md0
   Physical volume "/dev/md0" successfully created.
@@ -150,7 +150,7 @@ root@vagrant:~# pvcreate /dev/md1
 ```
 
 #### 9. Создайте общую volume-group на этих двух PV.
-
+</br><b>РЕШЕНИЕ:</b>
 ```shell
 root@vagrant:~# vgcreate netology /dev/md0 /dev/md1
   Volume group "netology" successfully created
@@ -164,7 +164,7 @@ root@vagrant:~# vgs
 ```
 
 #### 10. Создайте LV размером 100 Мб, указав его расположение на PV с RAID0.
-
+</br><b>РЕШЕНИЕ:</b>
 ```shell
 root@vagrant:~# lvcreate -L 100m -n netology-lv netology /dev/md1
   Logical volume "netology-lv" created.
@@ -176,7 +176,7 @@ root@vagrant:~# lvs -o +devices
 ```
 
 #### 11. Создайте `mkfs.ext4` ФС на получившемся LV.
-
+</br><b>РЕШЕНИЕ:</b>
 ```shell
 oot@vagrant:~# mkfs.ext4 -L netology-ext4 -m 1 /dev/mapper/netology-netology--lv
 mke2fs 1.45.5 (07-Jan-2020)
@@ -191,7 +191,7 @@ root@vagrant:~# blkid | grep netology-netology--lv
 ```
 
 #### 12. Смонтируйте этот раздел в любую директорию, например, `/tmp/new`.
-
+</br><b>РЕШЕНИЕ:</b>
 ```shell
 root@vagrant:~# mkdir /tmp/new
 root@vagrant:~# mount /dev/mapper/netology-netology--lv /tmp/new/
@@ -200,7 +200,7 @@ root@vagrant:~# mount | grep netology-netology--lv
 ```
 
 #### 13. Поместите туда тестовый файл, например `wget https://mirror.yandex.ru/ubuntu/ls-lR.gz -O /tmp/new/test.gz`.
-
+</br><b>РЕШЕНИЕ:</b>
 ```shell
 root@vagrant:~# cd /tmp/new/
 root@vagrant:/tmp/new# wget https://mirror.yandex.ru/ubuntu/ls-lR.gz -O /tmp/new/test.gz
@@ -217,7 +217,7 @@ Saving to: ‘/tmp/new/test.gz’
 ```
 
 #### 14. Прикрепите вывод `lsblk`.
-
+</br><b>РЕШЕНИЕ:</b>
 ```shell
 root@vagrant:/tmp/new# lsblk
 NAME                        MAJ:MIN RM  SIZE RO TYPE  MOUNTPOINT
@@ -249,7 +249,7 @@ root@vagrant:/tmp/new# echo $?
 0
 ````
 #### 16. Используя pvmove, переместите содержимое PV с RAID0 на RAID1.
-
+</br><b>РЕШЕНИЕ:</b>
 ```shell
 root@vagrant:/tmp/new# pvmove -n netology-lv /dev/md1 /dev/md0
   /dev/md1: Moved: 28.00%
@@ -262,14 +262,14 @@ root@vagrant:/tmp/new# lvs -o +devices
 ```
 
 #### 17. Сделайте `--fail` на устройство в вашем RAID1 md.
-
+</br><b>РЕШЕНИЕ:</b>
 ```shell
 root@vagrant:/tmp/new# mdadm --fail /dev/md0 /dev/sdb1
 mdadm: set /dev/sdb1 faulty in /dev/md0
 ```
 
 #### 18. Подтвердите выводом `dmesg`, что RAID1 работает в деградированном состоянии.
-
+</br><b>РЕШЕНИЕ:</b>
 ```shell
 root@vagrant:/tmp/new# dmesg | grep md0 | tail -n 2
 [ 2636.150864] md/raid1:md0: Disk failure on sdb1, disabling device.
@@ -282,8 +282,15 @@ root@vagrant:/tmp/new# gzip -t /tmp/new/test.gz
 root@vagrant:/tmp/new# echo $?
 0
 ```
-#### 20. Погасите тестовый хост, vagrant destroy.
 
+</br>Проверяю:
+
+</br>root@vagrant:/home/vagrant# gzip -t /tmp/logical_vol1/test.gz
+</br>root@vagrant:/home/vagrant# echo $?
+</br>0
+
+#### 20. Погасите тестовый хост, vagrant destroy.
+</br><b>РЕШЕНИЕ:</b>
 ```shell
 root@vagrant:/tmp/new# exit
 logout
