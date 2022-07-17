@@ -19,9 +19,9 @@ c = a + b
 ### Вопросы:
 | Вопрос  | Ответ |
 | ------------- | ------------- |
-| Какое значение будет присвоено переменной `c`?  | ???  |
-| Как получить для переменной `c` значение 12?  | ???  |
-| Как получить для переменной `c` значение 3?  | ???  |
+| Какое значение будет присвоено переменной `c`?  | операцию невозможно совершить - разные типы переменных  |
+| Как получить для переменной `c` значение 12?  | c = str(a) + b |
+| Как получить для переменной `c` значение 3?  | c = a + int(b)  |
 
 ## Обязательная задача 2
 Мы устроились на работу в компанию, где раньше уже был DevOps Engineer. Он написал скрипт, позволяющий узнать, какие файлы модифицированы в репозитории, относительно локальных изменений. Этим скриптом недовольно начальство, потому что в его выводе есть не все изменённые файлы, а также непонятен полный путь к директории, где они находятся. Как можно доработать скрипт ниже, чтобы он исполнял требования вашего руководителя?
@@ -43,12 +43,26 @@ for result in result_os.split('\n'):
 
 ### Ваш скрипт:
 ```python
-???
+#!/usr/bin/env python3
+
+import os
+
+bash_command = ["cd ~/netology/sysadm-homeworks", "git status"]
+result_os = os.popen(' && '.join(bash_command)).read()
+pwd = os.popen('pwd').read().replace('\n','')
+for result in result_os.split('\n'):
+    if result.find('modified') != -1:
+        prepare_result = result.replace('\tmodified:   ','')
+        print(pwd+'/'+prepare_result)
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-???
+vagrant@vagrant:~/netology/sysadm-homeworks$ python3 test.py
+/home/vagrant/netology/sysadm-homeworks/test01
+/home/vagrant/netology/sysadm-homeworks/test03
+/home/vagrant/netology/sysadm-homeworks/test.py
+
 ```
 
 ## Обязательная задача 3
@@ -56,12 +70,35 @@ for result in result_os.split('\n'):
 
 ### Ваш скрипт:
 ```python
-???
+#!/usr/bin/env python3
+
+import os
+import sys
+
+if len(sys.argv)==1:
+    bash_command = ["cd ~/netology/sysadm-homeworks", "git status"]
+    result_os = os.popen(' && '.join(bash_command)).read()
+    pwd = os.popen('pwd').read().replace('\n','')
+    for result in result_os.split('\n'):
+        if result.find('modified') != -1:
+            prepare_result = result.replace('\tmodified:   ','')
+            print(pwd+'/'+prepare_result)
+
+if len(sys.argv)==2:
+    bash_command = ["cd "+sys.argv[1], "git status"]
+    result_os = os.popen(' && '.join(bash_command)).read()
+    for result in result_os.split('\n'):
+        if result.find('modified') != -1:
+            prepare_result = result.replace('\tmodified:   ','')
+            print(sys.argv[1]+'/'+prepare_result)
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-???
+vagrant@vagrant:~$ python3 test.py /home/vagrant/test01
+/home/vagrant/test01/test01
+/home/vagrant/test01/test03
+/home/vagrant/test01/test.py
 ```
 
 ## Обязательная задача 4
@@ -69,12 +106,42 @@ for result in result_os.split('\n'):
 
 ### Ваш скрипт:
 ```python
-???
+import socket, time
+
+
+def ip_ch(name_service):
+    try:
+        return socket.gethostbyname(name_service)
+    except Exception as error:
+        return ("Error connect" + str(error))
+
+
+mas = ['drive.google.com', 'mail.google.com', 'google.com']
+ip = [ip_ch(mas[0]), ip_ch(mas[1]), ip_ch(mas[2])]
+for c, n in enumerate(mas): print(n, ip[c])
+a = 0
+while a < 10:
+    for c, n in enumerate(mas):
+        newip = ip_ch(n)
+        if ip[c] != newip:
+            print('[ERROR] ' + n + ' mismatch: ' + ip[c] + ' ' + newip)
+        ip[c] = newip
+        # print(n, ip[c]) #можно организовать вывод но будет моного лишних данных
+    time.sleep(60)
 ```
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-???
+drive.google.com 74.125.205.194
+mail.google.com 142.251.1.19
+google.com 142.251.1.102
+[ERROR] google.com mismatch: 142.251.1.102 64.233.162.113
+
+алгоритм выведет ошибку если будет отсутвовать доступ по новому адресу
+если для эмуляции ошибки исправить mail.google.com1 то вывод будет следующий
+drive.google.com 74.125.205.194
+mail.google.com1 Error connect[Errno 11001] getaddrinfo failed
+google.com 64.233.162.113
 ```
 
 ## Дополнительное задание (со звездочкой*) - необязательно к выполнению
