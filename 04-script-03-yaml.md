@@ -26,6 +26,8 @@
   Нужно найти и исправить все ошибки, которые допускает наш сервис
   
   ОТВЕТ:
+  
+  
   { "info" : "Sample JSON output from our service\t",
         "elements" :[
             { "name" : "first",
