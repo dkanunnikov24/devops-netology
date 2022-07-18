@@ -31,7 +31,7 @@ c = a + b
 
 import os
 
-bash_command = ["cd ~/netology/sysadm-homeworks", "git status"]
+bash_command = ["cd ~/netology/homeworks", "git status"]
 result_os = os.popen(' && '.join(bash_command)).read()
 is_change = False
 for result in result_os.split('\n'):
@@ -47,7 +47,7 @@ for result in result_os.split('\n'):
 
 import os
 
-bash_command = ["cd ~/netology/sysadm-homeworks", "git status"]
+bash_command = ["cd ~/netology/homeworks", "git status"]
 result_os = os.popen(' && '.join(bash_command)).read()
 pwd = os.popen('pwd').read().replace('\n','')
 for result in result_os.split('\n'):
@@ -58,10 +58,10 @@ for result in result_os.split('\n'):
 
 ### Вывод скрипта при запуске при тестировании:
 ```
-vagrant@vagrant:~/netology/sysadm-homeworks$ python3 test.py
-/home/vagrant/netology/sysadm-homeworks/test01
-/home/vagrant/netology/sysadm-homeworks/test03
-/home/vagrant/netology/sysadm-homeworks/test.py
+vagrant@vagrant:~/netology/homeworks$ python3 test.py
+/home/vagrant/netology/homeworks/test01
+/home/vagrant/netology/homeworks/test03
+/home/vagrant/netology/homeworks/test.py
 
 ```
 
@@ -76,7 +76,7 @@ import os
 import sys
 
 if len(sys.argv)==1:
-    bash_command = ["cd ~/netology/sysadm-homeworks", "git status"]
+    bash_command = ["cd ~/netology/homeworks", "git status"]
     result_os = os.popen(' && '.join(bash_command)).read()
     pwd = os.popen('pwd').read().replace('\n','')
     for result in result_os.split('\n'):
