@@ -1,11 +1,38 @@
 # Домашнее задание к занятию "3.9. Элементы безопасности информационных систем"
 
 1. Установите Bitwarden плагин для браузера. Зарегестрируйтесь и сохраните несколько паролей.
+
 ![Image text](https://github.com/dkanunnikov24/devops-netology/blob/main/1.jpg)
 
 2. Установите Google authenticator на мобильный телефон. Настройте вход в Bitwarden акаунт через Google authenticator OTP.
 
+![Image text](https://github.com/dkanunnikov24/devops-netology/blob/main/2a.jpg)
+
 3. Установите apache2, сгенерируйте самоподписанный сертификат, настройте тестовый сайт для работы по HTTPS.
+
+###
+
+    `vagrant@vagrant:~$ sudo openssl req -x509 -nodes -days 365 -newkey rsa:2048 \-keyout /etc/ssl/private/apache-selfsigned.key \-out /etc/ssl/certs/apache-selfsigned.crt \-subj "/C=RU/ST=Moscow/L=Moscow/O=Company Name/OU=Org/CN=test.com"
+    Generating a RSA private key
+    ..........................................................................................+++++
+    ...+++++
+    writing new private key to '/etc/ssl/private/apache-selfsigned.key'
+    -----
+    vagrant@vagrant:~$ sudo vim /etc/apache2/sites-available/test.com.conf
+    vagrant@vagrant:~$ sudo mkdir /var/www/test
+    vagrant@vagrant:~$ sudo vim /var/www/test/index.html
+    vagrant@vagrant:~$ sudo a2ensite test.com.conf
+    Enabling site test.com.
+    To activate the new configuration, you need to run:
+      systemctl reload apache2
+    vagrant@vagrant:~$ sudo apache2ctl configtest
+    Syntax OK
+    vagrant@vagrant:~$ sudo systemctl reload apache2
+    vagrant@vagrant:~$ curl https://test.com`
+
+
+###
+
 
 4. Проверьте на TLS уязвимости произвольный сайт в интернете (кроме сайтов МВД, ФСБ, МинОбр, НацБанк, РосКосмос, РосАтом, РосНАНО и любых госкомпаний, объектов КИИ, ВПК ... и тому подобное).
 
