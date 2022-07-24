@@ -1,6 +1,7 @@
 # Домашнее задание к занятию "3.9. Элементы безопасности информационных систем"
 
 1. Установите Bitwarden плагин для браузера. Зарегестрируйтесь и сохраните несколько паролей.
+![Image text](https://github.com/dkanunnikov24/devops-netology/blob/main/1.jpg)
 
 2. Установите Google authenticator на мобильный телефон. Настройте вход в Bitwarden акаунт через Google authenticator OTP.
 
