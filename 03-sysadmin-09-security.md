@@ -34,7 +34,58 @@
 ###
 
 
-4. Проверьте на TLS уязвимости произвольный сайт в интернете (кроме сайтов МВД, ФСБ, МинОбр, НацБанк, РосКосмос, РосАтом, РосНАНО и любых госкомпаний, объектов КИИ, ВПК ... и тому подобное).
+ 4. Проверьте на TLS уязвимости произвольный сайт в интернете (кроме сайтов МВД, ФСБ, МинОбр, НацБанк, РосКосмос, РосАтом, РосНАНО и любых госкомпаний, объектов КИИ, ВПК ... и тому подобное).
+
+##
+
+    `vagrant@vagrant:~$ git clone --depth 1 https://github.com/drwetter/testssl.sh.git
+     Cloning into 'testssl.sh'...
+     remote: Enumerating objects: 100, done.
+     remote: Counting objects: 100% (100/100), done.
+     remote: Compressing objects: 100% (93/93), done.
+     Receiving objects: 100% (100/100), 8.55 MiB | 254.00 KiB/s, done.
+     remote: Total 100 (delta 14), reused 36 (delta 6), pack-reused 0
+     Resolving deltas: 100% (14/14), done.
+     vagrant@vagrant:~$ cd testssl.sh
+     vagrant@vagrant:~/testssl.sh$ ./testssl.sh -U --sneaky https://www.google.com/
+
+    ###########################################################
+
+    testssl.sh       3.1dev from https://testssl.sh/dev/
+    (88e80d2 2022-07-02 22:13:06)
+
+     This program is free software. Distribution and
+                 modification under GPLv2 permitted.
+     USAGE w/o ANY WARRANTY. USE IT AT YOUR OWN RISK!
+
+     Please file bugs @ https://testssl.sh/bugs/
+
+     ###########################################################
+
+     Using "OpenSSL 1.0.2-chacha (1.0.2k-dev)" [~183 ciphers]
+     on bitrixservice:./bin/openssl.Linux.x86_64
+     (built: "Jan 18 17:12:17 2019", platform: "linux-x86_64")
+
+     Testing all IPv4 addresses (port 443): 64.233.165.106 64.233.165.103 64.233.165.147 64.233.165.99 64.233.165.105 64.233.165.10                             
+     4
+     ------------------------------------------------------------------------------------
+     Start 2022-07-24 10:37:01        -->> 64.233.165.106:443 (www.google.com) <<--
+
+     Further IP addresses:   64.233.165.103 64.233.165.147 64.233.165.99 64.233.165.105 64.233.165.104 2a00:1450:4010:c08::68
+                                     2a00:1450:4010:c08::67 2a00:1450:4010:c08::69 2a00:1450:4010:c08::6a
+     rDNS (64.233.165.106):  lg-in-f106.1e100.net.
+     Service detected:       HTTP
+
+     Testing vulnerabilities
+
+     Heartbleed (CVE-2014-0160)                not vulnerable (OK), no heartbeat extension
+     CCS (CVE-2014-0224)                       not vulnerable (OK)
+     Ticketbleed (CVE-2016-9244), experiment.  not vulnerable (OK)
+     ROBOT                                     not vulnerable (OK)
+
+
+##
+
 
 5. Установите на Ubuntu ssh сервер, сгенерируйте новый приватный ключ. Скопируйте свой публичный ключ на другой сервер. Подключитесь к серверу по SSH-ключу.
  
