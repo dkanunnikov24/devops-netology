@@ -88,8 +88,55 @@
 
 
 5. Установите на Ubuntu ssh сервер, сгенерируйте новый приватный ключ. Скопируйте свой публичный ключ на другой сервер. Подключитесь к серверу по SSH-ключу.
+###
+
+    `vagrant@vagrant:~$ ssh-keygen -C "dkanunnikov24@gmail.com"
+    Generating public/private rsa key pair.
+    Enter file in which to save the key (/home/vagrant/.ssh/id_rsa):
+    Enter passphrase (empty for no passphrase):
+    Enter same passphrase again:
+    Your identification has been saved in /home/vagrant/.ssh/id_rsa
+    Your public key has been saved in /home/vagrant/.ssh/id_rsa.pub
+    The key fingerprint is:
+    SHA256:... dkanunnikov24@gmail.com
+    The key's randomart image is:
+    +---[RSA 3072]----+
+    |o.++             |
+    |. ++.            |
+    | o.B=            |
+    |  *BE...         |
+    |  .%=.o.S        |
+    |  oooo =..       |
+    |  . ++.  oo      |
+    |   *o + +...     |
+    |  ..+o ..o..     |
+    +----[SHA256]-----+
+    vagrant@vagrant:~$ cat ~/.ssh/id_rsa.pub
+    ssh-rsa ...
+    ...
+    dkanunnikov24@gmail.com
+    vagrant@vagrant:~$ ssh -T git@github.com
+    Enter passphrase for key '/home/vagrant/.ssh/id_rsa':
+    Hi dkanunnikov24! You've successfully authenticated, but GitHub does not provide shell access.`
+
+###
  
 6. Переименуйте файлы ключей из задания 5. Настройте файл конфигурации SSH клиента, так чтобы вход на удаленный сервер осуществлялся по имени сервера.
+
+###
+    `vagrant@vagrant:~$ mv ~/.ssh/id_rsa ~/.ssh/id_rsa_git
+    vagrant@vagrant:~$ cat ~/.ssh/config
+    Host githab
+      HostName github.com
+      IdentityFile ~/.ssh/id_rsa_git
+      User git
+    vagrant@vagrant:~$ ssh githab
+    Enter passphrase for key '/home/vagrant/.ssh/id_rsa_git':
+    PTY allocation request failed on channel 0
+    Hi dkanunnikov24! You've successfully authenticated, but GitHub does not provide shell access.
+    Connection to github.com closed.`
+
+###
 
 7. Соберите дамп трафика утилитой tcpdump в формате pcap, 100 пакетов. Откройте файл pcap в Wireshark.
 
