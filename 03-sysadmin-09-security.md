@@ -63,7 +63,7 @@
      ###########################################################
 
      Using "OpenSSL 1.0.2-chacha (1.0.2k-dev)" [~183 ciphers]
-     on bitrixservice:./bin/openssl.Linux.x86_64
+     on vagrant:./bin/openssl.Linux.x86_64
      (built: "Jan 18 17:12:17 2019", platform: "linux-x86_64")
 
      Testing all IPv4 addresses (port 443): 64.233.165.106 64.233.165.103 64.233.165.147 64.233.165.99 64.233.165.105 64.233.165.10                             
