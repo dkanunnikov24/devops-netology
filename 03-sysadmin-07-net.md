@@ -6,61 +6,58 @@
 
 В Linux: ip link
 
-##
-vagrant@vagrant:~$ ifconfig
-   eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
-            inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255
-            inet6 fe80::a00:27ff:fe73:60cf  prefixlen 64  scopeid 0x20<link>
-            ether 08:00:27:73:60:cf  txqueuelen 1000  (Ethernet)
-            RX packets 95585  bytes 16772279 (16.7 MB)
-            RX errors 0  dropped 0  overruns 0  frame 0
-            TX packets 110084  bytes 9622242 (9.6 MB)
-            TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0
-            
-   lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536
-            inet 127.0.0.1  netmask 255.0.0.0
-            inet6 ::1  prefixlen 128  scopeid 0x10<host>
-            loop  txqueuelen 1000  (Local Loopback)
-            RX packets 987  bytes 91273 (91.2 KB)
-            RX errors 0  dropped 0  overruns 0  frame 0
-            TX packets 987  bytes 91273 (91.2 KB)
-            TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0`
-##
+>vagrant@vagrant:~$ ifconfig
+>   eth0: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500  
+>            inet 10.0.2.15  netmask 255.255.255.0  broadcast 10.0.2.255  
+>            inet6 fe80::a00:27ff:fe73:60cf  prefixlen 64  scopeid 0x20<link>  
+>            ether 08:00:27:73:60:cf  txqueuelen 1000  (Ethernet)  
+>            RX packets 95585  bytes 16772279 (16.7 MB)  
+>            RX errors 0  dropped 0  overruns 0  frame 0  
+>            TX packets 110084  bytes 9622242 (9.6 MB)  
+>            TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0  
+>            
+>   lo: flags=73<UP,LOOPBACK,RUNNING>  mtu 65536  
+>            inet 127.0.0.1  netmask 255.0.0.0  
+>            inet6 ::1  prefixlen 128  scopeid 0x10<host>  
+>            loop  txqueuelen 1000  (Local Loopback)  
+>            RX packets 987  bytes 91273 (91.2 KB)  
+>            RX errors 0  dropped 0  overruns 0  frame 0  
+>            TX packets 987  bytes 91273 (91.2 KB)  
+>            TX errors 0  dropped 0 overruns 0  carrier 0  collisions 0`  
+
 
 В Windows: ipconfig
 
-##
-C:\Users\Дмитрий>ipconfig
 
-Настройка протокола IP для Windows
-
-Адаптер беспроводной локальной сети Подключение по локальной сети* 1:
-
-   Состояние среды. . . . . . . . : Среда передачи недоступна.
-   DNS-суффикс подключения . . . . . :
-
-Адаптер беспроводной локальной сети Подключение по локальной сети* 2:
-
-   Состояние среды. . . . . . . . : Среда передачи недоступна.
-   DNS-суффикс подключения . . . . . :
-
-Адаптер беспроводной локальной сети Беспроводная сеть:
-
-   DNS-суффикс подключения . . . . . : Dlink
-   IPv6-адрес. . . . . . . . . . . . : fd01::64ed:7d3b:d0f:7dee
-   Временный IPv6-адрес. . . . . . . : fd01::c178:3108:e13f:7e9d
-   Локальный IPv6-адрес канала . . . : fe80::64ed:7d3b:d0f:7dee%16
-   IPv4-адрес. . . . . . . . . . . . : 192.168.0.108
-   Маска подсети . . . . . . . . . . : 255.255.255.0
-   Основной шлюз. . . . . . . . . : fe80::3e1e:4ff:fe4f:81e2%16
-                                       192.168.0.1
-
-Адаптер Ethernet Сетевое подключение Bluetooth:
-
-   Состояние среды. . . . . . . . : Среда передачи недоступна.
-   DNS-суффикс подключения . . . . . 
-
-##
+>C:\Users\Дмитрий>ipconfig  
+>  
+>Настройка протокола IP для Windows  
+>  
+>Адаптер беспроводной локальной сети Подключение по локальной сети* 1:  
+>  
+>   Состояние среды. . . . . . . . : Среда передачи недоступна.  
+>   DNS-суффикс подключения . . . . . :  
+>  
+>Адаптер беспроводной локальной сети Подключение по локальной сети* 2:  
+>  
+>   Состояние среды. . . . . . . . : Среда передачи недоступна.  
+>   DNS-суффикс подключения . . . . . :  
+>  
+>Адаптер беспроводной локальной сети Беспроводная сеть:  
+>  
+>   DNS-суффикс подключения . . . . . : Dlink  
+>   IPv6-адрес. . . . . . . . . . . . : fd01::64ed:7d3b:d0f:7dee  
+>   Временный IPv6-адрес. . . . . . . : fd01::c178:3108:e13f:7e9d  
+>   Локальный IPv6-адрес канала . . . : fe80::64ed:7d3b:d0f:7dee%16  
+>   IPv4-адрес. . . . . . . . . . . . : 192.168.0.108  
+>   Маска подсети . . . . . . . . . . : 255.255.255.0   
+>   Основной шлюз. . . . . . . . . : fe80::3e1e:4ff:fe4f:81e2%16  
+>                                       192.168.0.1  
+>  
+>Адаптер Ethernet Сетевое подключение Bluetooth:  
+>  
+>   Состояние среды. . . . . . . . : Среда передачи недоступна.  
+>   DNS-суффикс подключения . . . . .   
 
 2. Какой протокол используется для распознавания соседа по сетевому интерфейсу? Какой пакет и команды есть в Linux для этого?
 
